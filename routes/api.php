@@ -39,9 +39,6 @@ Route::prefix('v2')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/shorten-url', [UrlController::class, 'shortenUrl']);
         Route::get('/list-urls', [UrlController::class, 'listUrls']);
-
-        // unique to v2
-
         Route::get('/visitors', [VisitorController::class ,'Visitor']);
 
 
