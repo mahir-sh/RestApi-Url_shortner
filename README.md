@@ -1,66 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+URL Shortener RESTful API Service
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project provides a RESTful API for a URL shortening service. The service is built using Laravel and supports user registration, login (with API key authentication using Sanctum), URL shortening, listing, and redirection. Additionally, version 2 of the API includes visit counting for short URLs.
+Features
+v1
 
-## About Laravel
+    User Registration: Users can create an account.
+    User Login: Returns an API key to authenticate future requests (using Laravel Sanctum).
+    URL Shortening: Authenticated users can shorten URLs. If a URL has already been shortened by the user, the existing short URL is returned instead of creating a new one.
+    Unique Short URLs: Each shortened URL is unique to avoid collisions.
+    List User's URLs: Users can view the list of their registered URLs.
+    Redirection: Browsing a short URL redirects to the original long URL.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+v2
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+    All v1 Features: v2 includes all features from v1.
+    Visit Counting: Keeps track of the number of times each short URL has been accessed.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Installation
+Step 1: Install Dependencies
 
-## Learning Laravel
+Clone the project and install all necessary dependencies:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+composer install
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Step 2: Set Up Environment Variables
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Copy the example .env file and generate a new application key:
 
-## Laravel Sponsors
+cp .env.example .env
+php artisan key:generate
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Update the .env file with your database credentials.
+Step 3: Run Migrations
 
-### Premium Partners
+Run the database migrations to create the required tables:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+php artisan migrate
 
-## Contributing
+Step 4: Serve the Application
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Start the development server:
 
-## Code of Conduct
+php artisan serve
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+API Routes
+v1 Routes
+Method	Endpoint	Description
+POST	/api/v1/register	Register a new user
+POST	/api/v1/login	Login and retrieve an API token
+POST	/api/v1/logout	Logout the user and revoke the token
+POST	/api/v1/shorten-url	Shorten a URL
+GET	/api/v1/list-urls	List URLs registered by the authenticated user
+GET	/{short_url}	Redirects to the original long URL (Web route)
+v2 Routes
 
-## Security Vulnerabilities
+Includes all v1 routes plus:
+Method	Endpoint	Description
+GET	/api/v2/list-urls	List URLs with visit counts
+Usage Example
+Setting the Bearer Token in Postman
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    Obtain the token by logging in at /api/v1/login.
+    Save the token in an environment variable, e.g., access_token.
+    Use Bearer {{access_token}} in the Authorization header for all authenticated requests.
 
-## License
+Example JSON Responses
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Shorten URL Request:
+
+POST /api/v1/shorten-url
+{
+    "long_url": "https://example.com"
+}
+
+Response:
+
+{
+    "short_url": "https://your-domain.com/abc123"
+}
+
+List URLs Response:
+
+[
+    {
+        "long_url": "https://example.com",
+        "short_url": "abc123",
+        "user_name": "Mahir",
+        "user_id": 1
+    }
+]
+
+License
+
+This project is licensed under the MIT License.
