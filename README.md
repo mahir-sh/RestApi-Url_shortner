@@ -15,6 +15,33 @@ This RESTful API provides URL shortening services with user registration and aut
 - Includes all features from **v1**.
 - **Visit Count**: Track the number of times each shortened URL is accessed.
 
+
+## API Routes
+
+### Authentication Routes
+| Method | Endpoint               | Description                                 |
+| ------ | ----------------------- | ------------------------------------------- |
+| POST   | /api/v1/register        | Register a new user.                        |
+| POST   | /api/v1/login           | Log in to receive an API token.             |
+| POST   | /api/v1/logout          | Log out the authenticated user. Requires authentication. |
+
+### URL Shortening Routes (v1)
+| Method | Endpoint               | Description                                 |
+| ------ | ----------------------- | ------------------------------------------- |
+| POST   | /api/v1/shorten-url     | Shorten a URL (Requires API token).         |
+| GET    | /api/v1/list-urls       | List all URLs shortened by the user.        |
+| GET    | /{short_url}            | Redirect to the original URL.               |
+
+### Additional Features in v2
+| Method | Endpoint               | Description                                 |
+| ------ | ----------------------- | ------------------------------------------- |
+| POST   | /api/v2/shorten-url     | Shorten a URL with visit counting.          |
+| GET    | /api/v2/list-urls       | List URLs with visit counts.                |
+
+
+
+
+
 ## Installation
 
 **Clone the Repository**:
