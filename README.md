@@ -73,3 +73,6 @@ php artisan migrate
 ```bash
 php artisan serve
 ```
+
+![image](https://github.com/user-attachments/assets/df184dda-4633-484d-a1a9-90ca82097674)
+
