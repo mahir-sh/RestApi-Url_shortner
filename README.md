@@ -46,7 +46,21 @@ This RESTful API provides URL shortening services with user registration and aut
 
 **Clone the Repository**:
    ```bash
-   git clone <[https://github.com/mahir-sh/RestApi-Url_shortner.git
+   git clone https://github.com/mahir-sh/RestApi-Url_shortner.git
 
 ```
 
+```bash
+# Install Dependencies
+composer install
+
+# Set Up Environment Variables
+cp .env.example .env
+php artisan key:generate
+
+# Configure Database
+# Update your .env file with your database credentials, then run migrations:
+php artisan migrate
+
+# Serve the Application
+php artisan serve
