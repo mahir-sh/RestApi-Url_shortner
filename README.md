@@ -53,14 +53,23 @@ This RESTful API provides URL shortening services with user registration and aut
 ```bash
 # Install Dependencies
 composer install
+```
 
 # Set Up Environment Variables
+
+```bash
 cp .env.example .env
 php artisan key:generate
-
+```
 # Configure Database
 # Update your .env file with your database credentials, then run migrations:
+
+```bash
 php artisan migrate
+```
 
 # Serve the Application
+
+```bash
 php artisan serve
+```
