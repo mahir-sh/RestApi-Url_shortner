@@ -46,7 +46,7 @@ This RESTful API provides URL shortening services with user registration and aut
 
 **Clone the Repository**:
    ```bash
-   [git clone <[https://github.com/mahir-sh/RestApi-Url_shortner.git]>
+   git clone <[https://github.com/mahir-sh/RestApi-Url_shortner.git
 
-
+```
 
