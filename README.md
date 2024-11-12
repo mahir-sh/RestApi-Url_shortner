@@ -22,25 +22,4 @@ This RESTful API provides URL shortening services with user registration and aut
    git clone <your-repo-url>
    cd <your-repo-directory>
 
-<p>1. Install Dependencies:</p>
 
-```
-composer install
-```
-
-<p>2. Set Up Environment Variables:</p>
-
-```
-cp .env.example .env php artisan key:generate
-```
-
-<p>3. Configure Database: Update your .env file with your database credentials then run migrations:</p>
-
-```
-cp .env.example .env php artisan key:generate
-```
-
-<p>4. Serve the Application:</p>
-
-```
-php artisan serve
