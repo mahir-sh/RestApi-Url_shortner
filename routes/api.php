@@ -3,10 +3,11 @@
 use App\Http\Controllers\API\V1\LoginController;
 use App\Http\Controllers\API\V1\RegistrationController;
 use App\Http\Controllers\API\V1\UrlController;
-//use App\Http\Controllers\API\V2\NewFeatureController; // Assuming the extra feature is in this controller
-use App\Http\Controllers\V2\VisitorController;
+use App\Http\Controllers\API\V2\VisitorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+//use App\Http\Controllers\API\V2\NewFeatureController; // Assuming the extra feature is in this controller
 
 // User information route
 Route::get('/user', function (Request $request) {
