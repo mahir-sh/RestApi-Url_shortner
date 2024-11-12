@@ -11,9 +11,12 @@ class Url extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'long_url', 'short_url'];
-
-
+    protected $fillable = [
+        'user_id',
+        'long_url',
+        'short_url',
+        'count', // Make sure 'count' is in fillable
+    ];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

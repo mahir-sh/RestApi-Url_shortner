@@ -1,17 +1,7 @@
 <?php
 
-use App\Http\Controllers\API\V1\RedirectController;
-
+use App\Http\Controllers\RedirectController;
 use Illuminate\Support\Facades\Route;
 
-
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-
-// Redirect a shortened URL to the actual URL
-
-oute::get('/{short_Url}', RedirectController::class)->name('shortenUrl');
+// Route to handle URL redirection and increment count
+Route::get('/{shortUrl}', [RedirectController::class, 'redirectToLongUrl']);

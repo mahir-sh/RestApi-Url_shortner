@@ -1,26 +1,21 @@
 <?php
-
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Models\Url;
+use App\Http\Requests\V1\UrlRequest;
 
 class UrlController extends Controller
 {
     // Shorten a URL
-    public function shortenUrl(Request $request): \Illuminate\Http\JsonResponse
+    public function shortenUrl(UrlRequest $request): \Illuminate\Http\JsonResponse
     {
         // Check if the user is authenticated
         if (!Auth::check()) {
             return response()->json(['message' => 'Unauthorized access. Please log in.'], 401);
         }
-
-        $request->validate([
-            'long_url' => 'required|url',
-        ]);
 
         $user = Auth::user();
         $longUrl = $request->input('long_url');
